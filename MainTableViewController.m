@@ -49,20 +49,20 @@ static NSString *simpleTableIdentifier = @"SimpleTableItem";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *Jay =  [[[ArrayHolder sharedSites] webSites] objectAtIndex:indexPath.row];
+    //NSString *Jay =  [[[ArrayHolder sharedSites] webSites] objectAtIndex:indexPath.row];
 
     
     //WebSite *q = [[[ArrayHolder sharedSites] allArray] objectAtIndex:indexPath.row];
   //NSString *Jay = q.address;
     
-    WebDetailViewController *webDetailViewController = [[WebDetailViewController alloc] init];
+    //WebDetailViewController *webDetailViewController = [[WebDetailViewController alloc] init];
 
-    webDetailViewController.URL = [NSMutableString stringWithFormat:@"http://%",Jay];
+   // webDetailViewController.URL = [NSMutableString stringWithFormat:@"http://%",Jay];
     
     
     
-    MainTableViewController *mainTableViewController = [[MainTableViewController alloc] init];
-    [self.navigationController pushViewController:webDetailViewController animated:YES];
+    //MainTableViewController *mainTableViewController = [[MainTableViewController alloc] init];
+   // [self.navigationController pushViewController:webDetailViewController animated:YES];
 }
 
 
