@@ -5,39 +5,32 @@
 //  Created by jsanto on 3/16/15.
 //  Copyright (c) 2015 Jason Santo. All rights reserved.
 //
-
+#import "DetailViewController.h"
+#import "ArrayHolder.h"
 #import "WebDetailViewController.h"
 #import "MainTableViewController.h"
+#import "WebSite.h"
 
 @interface MainTableViewController ()
-
-
 
 @end
 
 @implementation MainTableViewController
 
-
-
-
-
-{
-    NSArray * webSites;
-    
-}
-
+static NSString *simpleTableIdentifier = @"SimpleTableItem";
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    webSites =[NSArray arrayWithObjects:@"WWW.CNN.COM",@"WWW.GOOGLE.COM",@"WWW.MSN.COM",@"WWW.CNBC.COM", @"WWW.YAHOO.COM", nil];
+
     
 }
 
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [webSites count];
+    
+    return [[[ArrayHolder sharedSites]allArray] count];
 }
 
 
@@ -45,24 +38,65 @@
 {
     static NSString *simpleTableIdentifier = @"SimpleTableItem";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+   UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+        
     
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
-    }
-    
-    cell.textLabel.text = [webSites objectAtIndex:indexPath.row];
+    WebSite *t = [[[ArrayHolder sharedSites] allArray] objectAtIndex:indexPath.row];
+    cell.textLabel.text = t.address;
+    cell.backgroundColor = [UIColor whiteColor];
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSString *Jay =  [[[ArrayHolder sharedSites] webSites] objectAtIndex:indexPath.row];
+
+    
+    //WebSite *q = [[[ArrayHolder sharedSites] allArray] objectAtIndex:indexPath.row];
+  //NSString *Jay = q.address;
+    
     WebDetailViewController *webDetailViewController = [[WebDetailViewController alloc] init];
-    webDetailViewController.URL = [NSMutableString stringWithFormat: @"http://%@", [webSites objectAtIndex:[indexPath item]]];
+
+    webDetailViewController.URL = [NSMutableString stringWithFormat:@"http://%",Jay];
+    
+    
+    
+    MainTableViewController *mainTableViewController = [[MainTableViewController alloc] init];
     [self.navigationController pushViewController:webDetailViewController animated:YES];
 }
 
-- (void)didReceiveMemoryWarning {
+
+
+
+- (IBAction)addNewItem:(id)sender
+{
+    DetailViewController *detailViewController = [[DetailViewController alloc] init];
+    detailViewController.selectedIndex = -1;
+    
+    [self.navigationController pushViewController:detailViewController animated:YES];
+    
+    
+}
+
+- (IBAction)toggleEditingMode:(id)sender
+{
+     if(self.isEditing){
+    
+        [sender setTitle:@"Edit" forState:UIControlStateNormal];
+         [self setEditing:NO animated:YES];
+        
+    }
+       else{
+           [sender setTitle:@"Done" forState:UIControlStateNormal];
+          
+           [self setEditing:YES animated:YES];
+       }
+ 
+}
+- (void)didReceiveMemoryWarning
+
+
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

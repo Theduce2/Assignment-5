@@ -6,9 +6,13 @@
 //  Copyright (c) 2015 Jason Santo. All rights reserved.
 //
 
+#import "ArrayHolder.h"
 #import <UIKit/UIKit.h>
+
+
+
 
 @interface MainTableViewController : UIViewController
 
-@property (nonatomic, strong) NSArray * websites;
+
 @end

@@ -5,8 +5,10 @@
 //  Created by jsanto on 3/16/15.
 //  Copyright (c) 2015 Jason Santo. All rights reserved.
 //
-
+#import "ArrayHolder.h"
 #import "WebDetailViewController.h"
+#import "WebSite.h"
+
 
 @interface WebDetailViewController ()
 
@@ -17,11 +19,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    
     NSURL *url = [NSURL URLWithString:_URL];
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
     [_Display loadRequest:requestObj];
     
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)didReceiveMemoryWarning {
